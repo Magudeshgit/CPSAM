@@ -1,0 +1,91 @@
+{% extends "authentication/base.html" %}
+{% load static %}
+{% block title %} Create Account {% endblock %}
+{% block content %}
+
+<div class="flex justify-center font-poppins">
+        <div class="w-full px-6 py-10 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                <!-- <div class=" z-20 relative flex items-center gap-4 mb-6">
+                  <img src="{% static 'images/mcetlogo.png' %}" class="w-[75px]">
+                  <p class="text-xl font-bold mt-4">Dr.Mahalingam College of Engineering and Technology</p>
+                </div> -->
+            </div>
+          <div class="max-w-2xl mx-auto">
+                            <p class="text-xl font-poppins font-bold">Sign in to your Account</p>
+                <p class=" text-gray-600">
+                  Already have an account?
+                  <a href="{% if request.GET.next %}{% url 'signin'%}?next={{request.GET.next}}{% else %} /signin {% endif %}" class="font-semibold text-[#D4AF37] hover:text-[#C2A34E]">Sign in</a>
+                </p>
+                <p class="errortext text-red-600 mt-4 text-sm font-semibold">{{error}}</p>
+            <div class="transition-all flex gap-2 mt-4 bg-gray-100 p-1 rounded-md shadow-inner">
+                  <button value="student" class="formselector stubtn w-full rounded-md bg-[#D4AF37] text-black px-3 py-2     font-semibold shadow-sm transition-all">Student</button>
+                  <button value="staff" class="formselector stfbtn w-full rounded-md bg-transparent text-gray-600 px-3 py-2 font-semibold transition-all">Faculty</button>
+                </div>
+            <form class="space-y-6 form studentform" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div>
+                  <label for="business_name" class="block text-sm font-medium text-gray-800 mb-2 labelusername">Student Register Number</label>
+                  <input id="business_name" name="username" type="text" autocomplete="business_name" required class="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#D4AF37] focus:ring focus:ring-[#D4AF37] focus:ring-opacity-50 py-2 px-3">
+              </div>
+  
+              <div>
+                   <label for="password" class="text-sm font-medium leading-6 text-gray-900 flex justify-between">
+                    Password
+                    <a href="{% url 'password_reset' %}" class="text-[#c69b0d]">Forgot Password</a>
+                  </label>
+                  <input id="password" name="password" type="password" required class="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#D4AF37] focus:ring focus:ring-[#D4AF37] focus:ring-opacity-50 py-2 px-3">
+              </div>
+        
+              <div class="border-t border-gray-200 pt-6">
+                <button type="submit" class="flex w-full justify-center rounded-md bg-[#D4AF37] px-6 py-2 font-semibold text-black shadow-md hover:bg-[#C2A34E] transition-all">
+                  Signin 
+                </button>
+              </div>
+            </form>
+            <p class="mt-2 text-center text-gray-500">
+              Don't have an account?
+              <a href="{% if request.GET.next %}{% url 'signup'%}?next={{request.GET.next}}{% else %} /signup {% endif %}" class="font-semibold leading-6 text-[#D4AF37] hover:text-[#a7871d]">Signup</a>
+            </p>
+          </div>
+        </div>
+        <!-- Side banner -->
+        <!-- <div class="flex max-h-full lg:max-w-[50%] justify-center ">
+          <img src="{% static 'images/signinpg.jpg' %}" class="md:max-h-[70%]" alt="banner">
+        </div> -->
+      </div>
+    
+{% endblock %}
+{% block script %}
+   <script>
+    document.querySelectorAll('.formselector').forEach(e=>{
+      e.addEventListener('click', changeForm)
+    })
+
+    function changeForm(e)
+        {
+          if (e.target.value === "staff")
+          {
+            document.querySelector('.stubtn').style.background = "transparent"
+            document.querySelector('.stubtn').style.color = "black"
+
+            document.querySelector('.stfbtn').style.background = "#D4AF37"
+            document.querySelector('.stfbtn').style.color = "white"
+
+            document.querySelector('.labelusername').innerText = "Email Address"
+            // document.querySelector('.username').setAttribute('type', 'email')
+          } 
+          else if (e.target.value === "student")
+          {
+            document.querySelector('.stfbtn').style.background = "transparent"
+            document.querySelector('.stfbtn').style.color = "black"
+
+            document.querySelector('.stubtn').style.background = "#D4AF37"
+            document.querySelector('.stubtn').style.color = "white"
+            document.querySelector('.labelusername').innerText = "Student Register Number"
+            // document.querySelector('.username').setAttribute('type', 'email')
+          }
+        }
+   </script>
+
+  {% endblock %}

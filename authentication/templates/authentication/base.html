@@ -1,0 +1,39 @@
+{% load static %}
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <title>CPSAM | {% block title %} {% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    {% tailwind_css %}
+</head>
+<body class="max-w-[1440px] mx-auto font-poppins">
+    <nav class="p-3 flex justify-between items-center w-full font-poppins sticky top-0 z-30 bg-white">
+        <div>
+            <div class="flex items-center gap-2 md:gap-3 font-[Poppins] z-40">
+                <span class="w-[1px] h-[40px] bg-gray-300 rounded-md"></span>
+                <div class="flex items-center gap-3">
+                  <div class="flex flex-col justify-center">
+                    <p class="font-semibold font-sans"><span class="font-poppins text-sm">Centralized Platform for</span><br>Student Activity Management</p>
+                  </div>
+                </div>
+            </div>
+        </div>
+      <div class="block">
+        <a href="{% if request.GET.next %}{% url 'signin'%}?next={{request.GET.next}}{% else %} {% url 'signin'%} {% endif %}" class="py-2 px-8 text-sm font-medium bg-[#D4AF37] hover:bg-[#deb42b] transition-all rounded-3xl text-black">
+          Signin
+        </a>
+      </div>
+    </nav>
+    {% block content %}
+
+    {% endblock %}
+{% block script %}
+{% endblock %}
+</body>
+</html>
