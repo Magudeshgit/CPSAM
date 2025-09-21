@@ -14,7 +14,7 @@
                             <p class="text-xl font-poppins font-bold">Create your Account</p>
                 <p class=" text-gray-600">
                   Already have an account?
-                  <a href="{% if request.GET.next %}{% url 'signin'%}?next={{request.GET.next}}{% else %} /signin {% endif %}" class="font-semibold text-[#D4AF37] hover:text-[#C2A34E]">Sign in</a>
+                  <a href="{% if request.GET.next %}{% url 'signin'%}?next={{request.GET.next}}{% else %} {% url 'signin'%} {% endif %}" class="font-semibold text-[#D4AF37] hover:text-[#C2A34E]">Sign in</a>
                 </p>
                 <p class="errortext text-red-500 mt-4 text-sm font-medium">{{errortext}}</p>
             <div class="transition-all flex gap-2 mt-4 bg-gray-100 p-1 rounded-md shadow-inner">
@@ -164,7 +164,7 @@
         
             <p class="mt-2 text-center text-gray-500">
               Already have an account?
-              <a href="{% if request.GET.next %}{% url 'signin'%}?next={{request.GET.next}}{% else %} /signin {% endif %}" class="font-semibold leading-6 text-[#D4AF37] hover:text-[#a7871d]">Signin</a>
+              <a href="{% if request.GET.next %}{% url 'signin'%}?next={{request.GET.next}}{% else %} {% url 'signin'%}  {% endif %}" class="font-semibold leading-6 text-[#D4AF37] hover:text-[#a7871d]">Signin</a>
             </p>
           </div>
         </div>

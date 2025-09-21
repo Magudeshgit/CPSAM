@@ -49,7 +49,7 @@ class SiteUser(AbstractUser):
     # EMAIL_FIELD = "personalmail"
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
-    EMAIL_FIELD = ['email']
+    EMAIL_FIELD = 'email'
     
     def __str__(self):
         return self.username

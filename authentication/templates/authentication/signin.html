@@ -13,10 +13,10 @@
             </div>
           <div class="max-w-2xl mx-auto">
                             <p class="text-xl font-poppins font-bold">Sign in to your Account</p>
-                <p class=" text-gray-600">
-                  Already have an account?
-                  <a href="{% if request.GET.next %}{% url 'signin'%}?next={{request.GET.next}}{% else %} /signin {% endif %}" class="font-semibold text-[#D4AF37] hover:text-[#C2A34E]">Sign in</a>
-                </p>
+                <p class="mt-2 text-gray-500">
+              Don't have an account?
+              <a href="{% if request.GET.next %}{% url 'signup'%}?next={{request.GET.next}}{% else %} {% url 'signup'%} {% endif %}" class="font-semibold leading-6 text-[#D4AF37] hover:text-[#a7871d]">Signup</a>
+            </p>
                 <p class="errortext text-red-600 mt-4 text-sm font-semibold">{{error}}</p>
             <div class="transition-all flex gap-2 mt-4 bg-gray-100 p-1 rounded-md shadow-inner">
                   <button value="student" class="formselector stubtn w-full rounded-md bg-[#D4AF37] text-black px-3 py-2     font-semibold shadow-sm transition-all">Student</button>
@@ -45,7 +45,7 @@
             </form>
             <p class="mt-2 text-center text-gray-500">
               Don't have an account?
-              <a href="{% if request.GET.next %}{% url 'signup'%}?next={{request.GET.next}}{% else %} /signup {% endif %}" class="font-semibold leading-6 text-[#D4AF37] hover:text-[#a7871d]">Signup</a>
+              <a href="{% if request.GET.next %}{% url 'signup'%}?next={{request.GET.next}}{% else %} {% url 'signup'%} {% endif %}" class="font-semibold leading-6 text-[#D4AF37] hover:text-[#a7871d]">Signup</a>
             </p>
           </div>
         </div>
