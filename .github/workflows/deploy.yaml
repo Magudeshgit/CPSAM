@@ -1,0 +1,23 @@
+name: Deploy CPSAM to GCP VM
+
+on:
+  push:
+    branches:
+      - master  # Trigger only on master branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repo
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to VM
+        run: |
+            mkdir -p ~/.ssh
+            echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
+            ssh-keyscan -H 34.131.216.192 > ~/.ssh/known_hosts
+            ssh phariprasath2006@34.131.216.192 "echo connected successfully"
