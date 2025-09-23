@@ -16,7 +16,6 @@ jobs:
 
       - name: Deploy to VM
         run: |
-            install -m 600 - D /dev/null ~/.ssh/id_rsa
             echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
             ssh-keyscan -H 34.131.216.192 > ~/.ssh/known_hosts
             ssh phariprasath2006@34.131.216.192
