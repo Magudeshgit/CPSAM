@@ -16,7 +16,8 @@ jobs:
 
       - name: Deploy to VM
         run: |
-            chmod 600 ~/.ssh/id_rsa
+            mkdir -p ~/.ssh
             echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
             ssh-keyscan -H 34.131.216.192 > ~/.ssh/known_hosts
-            ssh phariprasath2006@34.131.216.192
+            ssh phariprasath2006@34.131.216.192 "echo connected successfully"
