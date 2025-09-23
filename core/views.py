@@ -1,4 +1,5 @@
 from django.shortcuts import render
-
-def home(request):
-    return render(request, "core/home.html")
+from activity.models import *
+def dashboard(request):
+    activities = ActivityManager.objects.all()
+    return render(request, "core/dashboard.html", {"activities": activities})

@@ -23,5 +23,5 @@ urlpatterns = [
     
     path('auth/', include("authentication.urls")),
     path('api/', include("api.urls")),
-    path('', home, name="home")
+    path('', view=dashboard, name="home")
 ]

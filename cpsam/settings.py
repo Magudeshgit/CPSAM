@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     
     'authentication',
     'core',
+    'activity',
     'api',
     
     'import_export',

@@ -1,0 +1,127 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Minimal style block for tab functionality */
+    .tab-content {
+        display: none;
+    }
+    .tab-content.active {
+        display: block;
+    }
+    
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="p-6">
+    
+    <div class="mb-6">
+      <div class="flex flex-col p-6 bg-white rounded-lg  ring-1 ring-gray-200 shadow-md border-l-4 border-[#D4AF37]">
+        <div class="flex justify-between gap-4 flex-wrap">
+        <div>
+        <h1 class="text-2xl font-bold text-gray-900">Student Dashboard</h1>
+        <p class="text-gray-600">Manage your achievements in one place.</p>
+        </div>
+        <div class="px-4 p-1 ring-1 ring-gray-200 rounded-lg bg-gray-100 inline-flex items-center">
+            <p class="font-medium">AY2023-2024</p>
+        </div>
+        </div>
+        <div class="w-full h-[1px] bg-gray-100 my-4"></div>
+        <div class="flex justify-between flex-wrap  gap-4 w-full ">
+            <div>
+                <p class="mb-2">Activities</p>
+                <p class="text-4xl font-semibold">16</p>
+            </div>
+            <div>
+                <p class="mb-2">Acitivity Index Score(AIS)</p>
+                <p class="text-4xl font-semibold">7.29</p>
+            </div>
+            <div>
+                <p class="mb-2">Attendance Percentage</p>
+                <p class="text-4xl font-semibold">96</p>
+            </div>
+            <div>
+                <p class="mb-2">Profile Integrations</p>
+                <p class="text-4xl font-semibold">Github/LeetCode</p>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+     <div class="mb-2 hidden md:block">
+        <p class="font-semibold text-lg">Quick Actions </p>
+     </div>
+     <button class="gap-2 flex md:hidden items-center justify-center w-full px-4 py-3 rounded-lg font-medium text-black bg-[#D4AF37] hover:bg-[#C2A34E] shadow transition-colors duration-200">
+            Quick Actions
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2">
+                <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+            </svg>
+     </button>
+     <div class="hidden md:grid md:grid-cols-3 lg:grid-cols-5 gap-3">
+        <a href="" class="gap-2 flex items-center justify-center w-full px-4 py-3 rounded-lg font-medium text-black bg-[#D4AF37] hover:bg-[#C2A34E] shadow transition-colors duration-200">
+            Competitions
+            <img src="{% static 'images/compet.svg' %}" alt="" class="w-5 h-5">
+        </a>
+        <a href="" class="gap-2 flex items-center justify-center w-full px-4 py-3 rounded-lg font-medium text-black bg-[#D4AF37] hover:bg-[#C2A34E] shadow transition-colors duration-200">
+            Workshop/Conference
+            <img src="{% static 'images/workshop.svg' %}" alt="" class="w-5 h-5">
+        </a>
+        <a href="" class="gap-2 flex items-center justify-center w-full px-4 py-3 rounded-lg font-medium text-black bg-[#D4AF37] hover:bg-[#C2A34E] shadow transition-colors duration-200">
+            Course Completion
+            <img src="{% static 'images/courses.svg' %}" alt="" class="w-5 h-5">
+        </a>
+        <a href="" class="gap-2 flex items-center justify-center w-full px-4 py-3 rounded-lg font-medium text-black bg-[#D4AF37] hover:bg-[#C2A34E] shadow transition-colors duration-200">
+            Projects
+            <img src="{% static 'images/project.svg' %}" alt="" class="w-5 h-5">
+        </a>
+        <a href="" class="gap-2 flex items-center justify-center w-full px-4 py-3 rounded-lg font-medium text-black bg-[#D4AF37] hover:bg-[#C2A34E] shadow transition-colors duration-200">
+            Pre-Placement
+            <img src="{% static 'images/ppo.svg' %}" alt="" class="w-5 h-5">
+        </a>
+     </div>
+     <div class="w-full h-[1px] bg-gray-100 my-6"></div>
+    <!-- Main Forms -->
+     <div class="grid grid-cols-1 gap-4">
+        {% for activity in activities %}
+         <div class="col-span-full md:col-span-3 md:col-start-1">
+            <div class="mb-2 flex justify-between items-center">
+                <p class="font-semibold text-lg">{{activity.activity_name}}</p>
+                <a href="" class="gap-2 inline-flex items-center justify-center font-semibold text-[#c09711] hover:text-[#C2A34E] hover:underline transition-colors duration-200">
+                    Add {{activity.activity_name}}
+                    <img src="{% static 'images/chevron.svg' %}" alt="" class="w-5 h-5">
+                </a>
+            </div>
+            <div class="flex items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-white p-12 text-center">
+                <div>
+                    <div class="mx-auto h-12 w-12 text-gray-400">
+                        <img src="{% static 'images/' %}{{ activity.icon }}" alt="" class="w-full opacity-55">
+                    </div>
+                    <h3 class="mt-2 text-2xl font-semibold text-gray-400">No {{activity.activity_name}} Yet</h3>
+                    <p class="mt-1 text-base text-gray-500">{{ section.empty_submessage }}</p>
+                </div>
+            </div>
+         </div>
+         {% endfor %}
+         <div class="md:col-span-1 md:col-start-4 row-span-2 row-start-1 bg-gray-50 p-6 ring-1 ring-gray-100 rounded-lg relative">
+            <div class="p-2 rounded-full bg-gray-100 inline-flex absolute right-6 top-6 cursor-pointer">
+                <img src="{% static 'images/share.svg' %}" alt="share" class="w-4 h-4 opacity-55">
+            </div>
+            <div class="w-full flex justify-center flex-col items-center text-center">
+                <div class="ring ring-white rounded-full w-32 h-32 overflow-hidden">
+                    <img src="{% static 'images/me.jpg' %}" alt="profile" class="h-full w-full object-cover">
+                </div>
+                <p class="text-xl font-semibold mt-4">{{request.user.full_name}}</p>
+                <p class="font-light text-sm text-gray-700">Pursing Bachelor's in {{request.user.department.dept_name}}</p>
+            </div>
+            <div class="w-full h-[.75px] bg-gray-200 my-4"></div>
+            
+         </div>
+     </div>
+</div>
+
+{% endblock %}
