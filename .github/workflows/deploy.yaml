@@ -14,10 +14,29 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Step 2: Setup SSH
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 34.131.216.192 >> ~/.ssh/known_hosts
+
+      # Step 3: Deploy to VM
       - name: Deploy to VM
         run: |
-            mkdir -p ~/.ssh
-            echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
-            chmod 600 ~/.ssh/id_rsa
-            ssh-keyscan -H 34.131.216.192 > ~/.ssh/known_hosts
-            ssh phariprasath2006@34.131.216.192 "echo connected successfully"
+          ssh cpsam@34.131.216.192 << 'EOF'
+            cd /opt/CPSAM
+            git fetch --all
+            git reset --hard origin/master
+
+            source venv/bin/activate
+            pip install -r requirements.txt
+
+            python manage.py migrate --noinput
+            python manage.py collectstatic --noinput
+
+            sudo systemctl restart gunicorn
+            sudo systemctl restart nginx
+          EOF
+
