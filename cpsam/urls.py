@@ -23,5 +23,7 @@ urlpatterns = [
     
     path('auth/', include("authentication.urls")),
     path('api/', include("api.urls")),
-    path('', view=dashboard, name="home")
+    path('activity/', include("activity.urls")),
+    
+    path('', view=dashboard, name="home"),
 ]

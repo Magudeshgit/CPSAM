@@ -1,0 +1,29 @@
+{% extends "activity/base.html" %}
+
+{% load static %}
+{% load tailwind_filters %}
+{% block content %}
+<div class="p-6">
+<p class="text-2xl font-bold text-gray-900">Add {{activity.activity_name}}</p>
+<p class="text-gray-500 mb-12">{{activity.additional_text}}</p>
+<form method="POST" class="grid grid-cols-2 gap-4">
+{% csrf_token %}
+{{ form|crispy }}
+{{form.certificate.}}
+
+<div class="relative flex gap-x-3 col-span-full">
+<div class="flex h-6 items-center">
+    <input id="comments" name="comments" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-[#D4AF37] focus:ring-[#D4AF37]">
+</div>
+
+<div class="text-sm leading-6">
+    <p class="text-gray-800 font-semibold text-sm">I certify that the information I have provided in this form is true, complete, and accurate to the best of my knowledge.</p>
+</div>
+</div>
+<a href="" class="col-span-full gap-2 flex items-center justify-center w-full px-4 py-3 rounded-lg font-medium text-black bg-[#D4AF37] hover:bg-[#C2A34E] shadow transition-colors duration-200">
+    Submit for Attestation
+    <img src="{% static 'images/check.svg' %}" alt="" class="w-5 h-5">
+</a>
+</form>
+</div>
+{% endblock %}

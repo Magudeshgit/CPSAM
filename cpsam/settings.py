@@ -36,6 +36,9 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
+    'crispy_tailwind',
+    
     "rest_framework",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,13 +52,11 @@ INSTALLED_APPS = [
     'activity',
     'api',
     
+    "django_select2",
     'import_export',
     
     'tailwind',
     'theme',
-    'crispy_forms',
-    'crispy_tailwind',
-    
 ]
 
 MIDDLEWARE = [

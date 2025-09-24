@@ -69,6 +69,8 @@ class ActivityManager(models.Model):
     activity_name = models.CharField(max_length=100)
     url_name = models.CharField(max_length=100)
     icon = models.CharField(max_length=100, help_text="filename")
+    additional_text = models.TextField()
     
     def __str__(self):
         return self.activity_name
+    

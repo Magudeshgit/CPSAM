@@ -25,18 +25,30 @@ class BaseAchievement(GenericAchievement):
     organizer_name = models.CharField(max_length=100, help_text="Internal Sub Organization within institution", blank=True)
     from_date = models.DateField()
     to_date = models.DateField()
-    class event_level(models.TextChoices):
+    class event_levels(models.TextChoices):
         INTERNATIONAL = ("INTERNATIONAL", "International")
         NATIONAL = ("NATIONAL", "National")
         STATE = ("STATE", "State")
         DISTRICT = ("DISTRICT", "District")
         ZONAL = ("ZONAL", "Zonal")
-    class result(models.TextChoices):
+    class results(models.TextChoices):
         FIRST = ("FIRST", "First Prize")
         SECOND = ("SECOND", "Second Prize")
         THIRD = ("THIRD", "Third Prize")
         SPECIAL_MENTION = ("SPECIAL_MENTION", "Special Mention")
         PARTICIPATION = ("PARTICIPATION", "Participation")
+        
+    event_level = models.CharField(
+        max_length=20,
+        choices=event_levels.choices,
+        default=event_levels.STATE,
+    )
+    result = models.CharField(
+        max_length=20,
+        choices=results.choices,
+        default=results.PARTICIPATION,
+        verbose_name="Achievement Outcome"
+    )
                                       
     location_link = models.URLField(help_text="Event Venue Link")
     
