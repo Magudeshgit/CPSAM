@@ -26,17 +26,35 @@ jobs:
       - name: Deploy to VM
         run: |
           ssh phariprasath2006@34.131.216.192 << 'EOF'
-            cd /opt/CPSAM
-            git config --global --add safe.directory /opt/CPSAM
+            # Navigate to project folder
+            cd /home/phariprasath2006/CPSAM
+            
+            # Make sure git is safe
+            git config --global --add safe.directory /home/phariprasath2006/CPSAM
+            
+            # Pull latest code
+            git reset --hard
             git pull origin master
 
+            # Activate virtual environment
             source venv/bin/activate
+
+            # Install Python dependencies
             pip install -r requirements.txt
 
+            # Build Tailwind CSS
+            python manage.py tailwind build
+
+            # Apply migrations
             python manage.py migrate --noinput
+
+            # Collect static files
             python manage.py collectstatic --noinput
 
-            sudo kill $(ps aux | pgrep gunicorn -o)
-            gunicorn cpsam.wsgi --daemon
-          EOF
+            # Restart Gunicorn
+            sudo systemctl daemon-reload
+            sudo systemctl restart gunicorn
 
+            # Optional: Check Gunicorn status
+            sudo systemctl status gunicorn --no-pager
+          EOF
