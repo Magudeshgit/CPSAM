@@ -27,7 +27,8 @@ jobs:
         run: |
           ssh phariprasath2006@34.131.216.192 << 'EOF'
             cd /opt/CPSAM
-            sudo git pull origin master
+            git config --global --add safe.directory /opt/CPSAM
+            git pull origin master
 
             source venv/bin/activate
             pip install -r requirements.txt
