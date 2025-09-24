@@ -11,7 +11,8 @@ class CompetitionForm(forms.ModelForm):
             'class': 'form-control',    # optional for styling (Bootstrap/Tailwind etc.)
         }))
     support_docs = forms.FileField(widget=forms.HiddenInput(), required=False)
+    certificate = forms.FileField(widget=forms.FileInput())
     
     class Meta:
         model = Competition
-        fields = ['title', 'domain', 'event_level', 'institution','organizer_name','location_link', 'from_date', 'to_date', 'result']
+        fields = ['title', 'domain', 'event_level', 'institution','organizer_name','location_link', 'from_date', 'to_date', 'result', 'certificate']
