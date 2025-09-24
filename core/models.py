@@ -111,7 +111,10 @@ class FileReasons(models.Model):
 
 class FileLog(models.Model):
     filename = models.CharField(max_length=100)
-    reason = models.ForeignKey(FileReasons, on_delete=models.CASCADE)
+    # reason = models.ForeignKey(FileReasons, on_delete=models.CASCADE)
+    reason = models.CharField(max_length=100)
+    created_by = models.ForeignKey(SiteUser, on_delete=models.CASCADE)
+    
     timestamp = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):

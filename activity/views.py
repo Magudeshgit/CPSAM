@@ -12,4 +12,7 @@ def dashboard(request):
 def add_activity(request, activity_id:int):
     activity = ActivityManager.objects.get(id=activity_id)
     forms = ALL_ACTIVITIES.get(activity.activity_name.lower()).get("forms")
+    if request.method == "POST":
+        valid = forms(request.POST)
+        print("hellp", valid.is_valid())
     return render(request, "activity/activity_add.html", {"form":forms, "activity": activity})

@@ -9,7 +9,13 @@
 <form method="POST" class="grid grid-cols-2 gap-4">
 {% csrf_token %}
 {{ form|crispy }}
-{{form.certificate.}}
+
+<div class="col-span-full col-start-1 row-st">
+    <p class="font-semibold text-sm">Submit Files</p>
+    <div class="bg-gray-100">
+
+    </div>
+</div>
 
 <div class="relative flex gap-x-3 col-span-full">
 <div class="flex h-6 items-center">
@@ -20,10 +26,11 @@
     <p class="text-gray-800 font-semibold text-sm">I certify that the information I have provided in this form is true, complete, and accurate to the best of my knowledge.</p>
 </div>
 </div>
-<a href="" class="col-span-full gap-2 flex items-center justify-center w-full px-4 py-3 rounded-lg font-medium text-black bg-[#D4AF37] hover:bg-[#C2A34E] shadow transition-colors duration-200">
+
+<button type="submit" class="col-span-full gap-2 flex items-center justify-center w-full px-4 py-3 rounded-lg font-medium text-black bg-[#D4AF37] hover:bg-[#C2A34E] shadow transition-colors duration-200">
     Submit for Attestation
     <img src="{% static 'images/check.svg' %}" alt="" class="w-5 h-5">
-</a>
+</button>
 </form>
 </div>
 {% endblock %}

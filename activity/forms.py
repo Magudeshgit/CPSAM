@@ -10,8 +10,7 @@ class CompetitionForm(forms.ModelForm):
             'type': 'datetime-local',   # HTML5 datetime picker
             'class': 'form-control',    # optional for styling (Bootstrap/Tailwind etc.)
         }))
-    certificate = forms.FileField()
-    support_docs = forms.FileField()
+    support_docs = forms.FileField(widget=forms.HiddenInput(), required=False)
     
     class Meta:
         model = Competition
