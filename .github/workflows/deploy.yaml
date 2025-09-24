@@ -34,7 +34,6 @@ jobs:
             pip install -r requirements.txt
 
             python manage.py migrate --noinput
-        # python manage.py collectstatic --noinput
 
             sudo kill -SIGUSR2 $(ps aux | pgrep gunicorn -o)
             gunicorn cpsam.wsgi worker=3 --daemon
