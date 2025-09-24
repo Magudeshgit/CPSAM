@@ -25,10 +25,9 @@ jobs:
       # Step 3: Deploy to VM
       - name: Deploy to VM
         run: |
-          ssh cpsam@34.131.216.192 << 'EOF'
+          ssh phariprasath2006@34.131.216.192 << 'EOF'
             cd /opt/CPSAM
-            git fetch --all
-            git reset --hard origin/master
+            git pull origin master
 
             source venv/bin/activate
             pip install -r requirements.txt
