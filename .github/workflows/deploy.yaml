@@ -3,14 +3,14 @@ name: Deploy CPSAM to GCP VM
 on:
   push:
     branches:
-      - master  # Trigger only on master branch
+      - master  # Deploy only on master branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repo
+      # Step 1: Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -26,14 +26,28 @@ jobs:
       - name: Deploy to VM
         run: |
           ssh phariprasath2006@34.131.216.192 << 'EOF'
-            cd ~/CPSAM  # Or your project directory
+            # Navigate to project
+            cd ~/CPSAM
+
+            # Pull latest changes
             git fetch origin
-            git reset --hard origin/master  # Force local branch to match remote
+            git reset --hard origin/master
+
+            # Activate virtual environment
             source venv/bin/activate
+
+            # Install dependencies
             pip install -r requirements.txt
+
+            # Apply database migrations
             python manage.py migrate --noinput
+
+            # Collect static files
             python manage.py collectstatic --noinput
-            # Restart Gunicorn
-            pkill gunicorn || true
-            gunicorn cpsam.wsgi:application --bind unix:~/CPSAM/cpsam.sock --workers 1 --daemon
+
+            # Restart Gunicorn systemd service
+            sudo systemctl restart gunicorn
+
+            # Reload Nginx to ensure changes take effect
+            sudo systemctl reload nginx
           EOF
