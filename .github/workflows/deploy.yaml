@@ -36,7 +36,7 @@ jobs:
             python manage.py migrate --noinput
             python manage.py collectstatic --noinput
 
-            sudo kill –USR2 $(ps aux | pgrep gunicorn -o)
+            sudo kill -SIGUSR2 $(ps aux | pgrep gunicorn -o)
             gunicorn cpsam.wsgi worker=3 --daemon
           EOF
 
