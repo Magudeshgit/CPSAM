@@ -10,9 +10,9 @@ mobbtn.addEventListener('click', ()=>{
      mobmenu.classList.toggle('hidden')
 })
 
-// usermenubtn.addEventListener('click', ()=>{
-//      usermenu.classList.toggle('hidden')
-// })
+usermenubtn.addEventListener('click', ()=>{
+     usermenu.classList.toggle('hidden')
+})
 
 // Setting profile color
 // window.onload = () =>{
