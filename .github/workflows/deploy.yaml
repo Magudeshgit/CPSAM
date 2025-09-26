@@ -40,5 +40,4 @@ jobs:
           EOF
 
 
-            sudo systemctl reload nginx
-          EOF
+
