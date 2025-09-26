@@ -28,7 +28,7 @@
         <!-- End of Notification -->
         <div class="header flex gap-6 items-center border-b-[1px] pb-6">
             <div class="w-32 h-32 rounded-full flex justify-center items-center">
-                <img src="{{request.user.profile_photo.url}}" alt="" class="h-full w-full object-cover">
+                <img src="{% if request.user.profile_photo %}{{request.user.profile_photo.url}}{% else %}{% static 'images/person.png' %}{% endif %}" class="h-full w-full object-cover rounded-full ring-1 ring-gray-300 shadow-sm">
                 <!-- <p class="font-medium text-6xl text-black">{{request.user.full_name|first}}</p> -->
             </div>
             <div class="headinfo">
@@ -37,10 +37,11 @@
                 <p class="text-gray-500">{{request.user.user_type|title}}</p>
             </div>
         </div>  
-        <form method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-2">    
+        <form method="POST" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-2 gap-2">    
         {% csrf_token %}
         {{ forms|crispy }}
-
+        {{ form|as_crispy_errors }}
+        
 
 
 

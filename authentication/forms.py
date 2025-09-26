@@ -17,4 +17,4 @@ class UserUpdateForm(forms.ModelForm):
         return cleaned_data
     class Meta:
         model = SiteUser
-        fields = ['full_name', 'username', 'email', 'date_joined', 'department', 'yos', 'contact']
+        fields = ['profile_photo', 'full_name', 'username', 'email', 'date_joined', 'department', 'yos', 'contact']

@@ -129,6 +129,8 @@
                 Certified by <strong>{{ act.course_provider.provider_name }}</strong>
             {% elif activity.activity_name == "Pre-Placements" %} 
                 <strong>{{ act.role }}</strong>
+            {% elif activity.activity_name == "Competition" %} 
+                <strong>{{ act.institution }}</strong>
             {% else %}
                 <strong>{{ act.organizer_name }}</strong>
             {% endif %}
@@ -187,8 +189,8 @@
                 <img src="{% static 'images/share.svg' %}" alt="share" class="w-4 h-4 opacity-55">
             </div>
             <div class="w-full flex justify-center flex-col items-center text-center">
-                <div class="ring ring-white rounded-full w-32 h-32 overflow-hidden">
-                    <img src="{{request.user.profile_photo.url}}" class="h-full w-full object-cover">
+                <div class="ring ring-white rounded-full w-32 h-32 overflow-hidden"> 
+                    <img src="{% if request.user.profile_photo %}{{request.user.profile_photo.url}}{% else %}{% static 'images/person.png' %}{% endif %}" class="h-full w-full object-cover">
                 </div>
                 <p class="text-xl font-semibold mt-4">{{request.user.full_name}}</p>
                 <p class="font-light text-sm text-gray-700">Pursing Bachelor's in {{request.user.department.dept_name}}</p>

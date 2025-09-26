@@ -3,6 +3,7 @@ from .models import *
 from .forms import *
 from core.models import Tags, Domain
 from authentication.models import SiteUser
+from django.contrib.auth.decorators import login_required
 ALL_ACTIVITIES = {
     "competition": {
         "model": Competition,
@@ -28,8 +29,11 @@ ALL_ACTIVITIES = {
     
 }
 
+@login_required
 def dashboard(request):
     return render(request, "activity/dashboard.html")
+
+@login_required
 def add_activity(request, activity_id:int):
     print(request.user.email)
     activity = ActivityManager.objects.get(id=activity_id)

@@ -65,17 +65,15 @@
            <!-- Profile dropdown -->
            <div class="relative ml-3">
              <div>
-               <button type="button" class="min-w-10 min-h-10 flex items-center justify-center relative rounded-full text-sm border-none focus:outline-none" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                 <div class="">
-                    <p class="text-white font-medium text-lg">{{request.user.username|make_list|first}}</p>
-                 </div>
+               <button type="button" class="w-12 h-12 flex items-center justify-center relative rounded-full text-sm border-none focus:outline-none" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                 <img src="{% if request.user.profile_photo %}{{request.user.profile_photo.url}}{% else %}{% static 'images/person.png' %}{% endif %}" class="h-full w-full object-cover rounded-full ring-1 ring-gray-300 shadow-sm">
                </button>
              </div>
    
              <div id="user-menu" class="z-20 absolute hidden right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                
                <p class="block px-4 py-2 text-sm text-gray-700 border-b-2">
-                <span class="font-medium">{{request.user.groups.first.name}}</span><br>
+                <span class="font-medium">{{request.user.full_name}}</span><br>
                 <span class="text-sm font-normal">
                   {% if request.user.dept %}
                   {{request.user.dept}}
@@ -83,8 +81,8 @@
                 </span>
                 </p>
               </p>
-               <a href="/profile" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-               <a href="/logout" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+               <a href="{% url 'profile' %}" class="block px-4 py-2 text-sm text-gray-900" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+               <a href="/logout" class="block px-4 py-2 text-sm text-gray-900" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
              </div>
            </div>
          </div>

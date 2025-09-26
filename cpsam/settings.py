@@ -168,3 +168,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'teammghproduction@gmail.com'
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASS")
 EMAIL_PORT = 587
+LOGIN_URL = "auth/signup/"
