@@ -12,6 +12,8 @@ urlpatterns = [
     path("", view=signup),
     path("signup/", view=signup, name="signup"),
     path("signin/", view=signin, name="signin"),
+    path("logout/", view=user_logout, name="logout"),
+    
     
     path('forgot_password/', view=password_reset.as_view(), name="password_reset"),
     path('password-reset-confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(template_name="authentication/password_reset_confirm.html"), name="password_reset_confirm"),
@@ -22,6 +24,3 @@ urlpatterns = [
 ]
 
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

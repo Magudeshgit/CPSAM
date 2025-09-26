@@ -10,23 +10,23 @@ mobbtn.addEventListener('click', ()=>{
      mobmenu.classList.toggle('hidden')
 })
 
-usermenubtn.addEventListener('click', ()=>{
-     usermenu.classList.toggle('hidden')
-})
+// usermenubtn.addEventListener('click', ()=>{
+//      usermenu.classList.toggle('hidden')
+// })
 
 // Setting profile color
-window.onload = () =>{
-     let theme = sessionStorage.getItem('profiletheme')
+// window.onload = () =>{
+//      let theme = sessionStorage.getItem('profiletheme')
      
-     if (theme)
-     {
-          usermenubtn.style.background = theme
-     }
-     else
-     {
-          theme = randomcolors[Math.floor(Math.random() * 5)]
-          usermenubtn.style.background = theme
-          sessionStorage.setItem('profiletheme', theme)
-     }
-     window.theme = theme
-}
+//      if (theme)
+//      {
+//           usermenubtn.style.background = theme
+//      }
+//      else
+//      {
+//           theme = randomcolors[Math.floor(Math.random() * 5)]
+//           usermenubtn.style.background = theme
+//           sessionStorage.setItem('profiletheme', theme)
+//      }
+//      window.theme = theme
+// }
