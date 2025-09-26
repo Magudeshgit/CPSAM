@@ -4,6 +4,8 @@ from django.db import IntegrityError
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
+from .forms import UserUpdateForm
+from django.contrib import messages
 
 from .models import *
 def signup(request):
@@ -65,3 +67,13 @@ class password_reset(SuccessMessageMixin, PasswordResetView):
 
 def passwordResetMailSent(request):
     return render(request, 'authentication/password_reset_mail_sent.html')
+
+def profile(request):
+    forms = UserUpdateForm(instance=request.user)
+    if request.method == "POST":
+        forms = UserUpdateForm(request.POST, instance=request.user)
+        if forms.is_valid():
+            forms.save()
+            messages.add_message(request, level=messages.INFO, message="Profile Successfully Updated")
+            
+    return render(request, "authentication/profile.html", {"forms": forms})

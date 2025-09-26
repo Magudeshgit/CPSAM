@@ -1,0 +1,63 @@
+{% extends "activity/base.html" %}
+
+{% load static %}
+{% load tailwind_filters %}
+{% load crispy_forms_tags %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+       <div class="mt-4 bg-white p-6">
+        <!-- Notification -->
+            {% if message %}
+            <div class="flex gap-2 items-center absolute top-5 right-5 z-40 bg-white p-4 shadow-sm rounded-md">
+                <div>
+                    <img src="{% static 'images/success.svg' %}" alt="">
+                </div>
+                <div>
+                    <p class="text-base font-medium">Success</p>
+                    <p class="text-sm">
+                            {% for message in messages %}
+                                {{message}}
+                            {% endfor %}
+                    </p>
+                </div>
+                <div class="absolute top-2 right-2 cursor-pointer" id="success-message">
+                    <img src="{% static 'images/close.svg' %}" class="opacity-50">
+                </div>
+            </div>
+            {% endif %}
+        <!-- End of Notification -->
+        <div class="header flex gap-6 items-center border-b-[1px] pb-6">
+            <div class="w-32 h-32 rounded-full flex justify-center items-center">
+                <img src="{{request.user.profile_photo.url}}" alt="" class="h-full w-full object-cover">
+                <!-- <p class="font-medium text-6xl text-black">{{request.user.full_name|first}}</p> -->
+            </div>
+            <div class="headinfo">
+                <p class="font-semibold text-3xl">{{request.user.full_name}} {{request.user.designation}}</p>
+                <p class="text-gray-500 mt-2">{{request.user.username}}</p>
+                <p class="text-gray-500">{{request.user.user_type|title}}</p>
+            </div>
+        </div>  
+        <form method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-2">    
+        {% csrf_token %}
+        {{ forms|crispy }}
+
+
+
+
+        <div class="mt-6 flex gap-2">
+            <button type="submit">
+                <button type="submit" class=" flex gap-2 items-center justify-between text-black bg-[#D4AF37] hover:bg-[#D4AF37] focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    Update Profile
+                    <img src="{% static 'images/check.svg' %}" class="w-4 h-4">
+                </button>
+            </button>
+            <a href="{% url 'password_reset' %}">
+                <button type="button" class="py-2.5 px-5 me-2 mb-2  flex items-center gap-2 text-sm font-semibold text-black focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-100">
+                    Change Password
+                    <img src="{% static 'images/chpass.svg' %}" class="w-4 h-4">
+                </button>
+            </a>
+        </div>
+        </form>
+    </div>
+{% endblock %}

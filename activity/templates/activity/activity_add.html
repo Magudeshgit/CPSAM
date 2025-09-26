@@ -2,38 +2,110 @@
 
 {% load static %}
 {% load tailwind_filters %}
+{% load crispy_forms_tags %}
+{% block title %} Add {{activity.activity_name}} {% endblock %}
 {% block content %}
 <div class="p-6">
 <p class="text-2xl font-bold text-gray-900">Add {{activity.activity_name}}</p>
 <p class="text-gray-500 mb-12">{{activity.additional_text}}</p>
-<form method="POST" class="grid grid-cols-2 gap-4">
+<form method="POST" class="grid grid-cols-2 gap-4 activityform" enctype="multipart/form-data">
 {% csrf_token %}
 {{ form|crispy }}
-<div class="w-full h-[1px] bg-gray-200 col-span-full"></div>
+{{ form|as_crispy_errors }}
+<!-- <div class="w-full h-[1px] bg-gray-200 col-span-full"></div>
 <div class="col-span-full col-start-1">
     <p class="font-semibold">Attach Support Documents</p>
     <p class="text-sm">These document will used in verifying the actuality of the proposal</p>
     <div class="flex gap-4 py-2 justify-between items-center">
         <div class="w-full">
-            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Event ID Card</label>
-            <input accept=".jpg,.png,.PNG,.JPEG" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
-            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG(1 Photo * 5MB)</p>
+            <label class="block mb-2 text-sm font-medium text-gray-900" for="file_input">Event ID Card</label>
+            <input required accept=".jpg,.png,.PNG,.JPEG" data-reason="activity_event_ID" class="file block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG(5MB * 1 Photo)</p>
         </div>
 
         <div class="w-full">
-            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Participation photos (individual or group)</label>
-            <input multiple accept=".jpg,.png,.PNG,.JPEG" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
-            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG(Maximum 5 Photos * 5 MB)</p>
+            <label class="block mb-2 text-sm font-medium text-gray-900" for="file_input">Participation photos (individual or group)</label>
+            <input required multiple accept=".jpg,.png,.PNG,.JPEG" data-reason="activity_participation_photos" class="multifile block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none" aria-describedby="file_input_help" id="file_input" type="file">
+            <p class="mt-1 text-sm text-gray-500" id="file_input_help">PNG, JPG(5MB * Maximum 5 Photos)</p>
         </div>
 
         <div class="w-full">
-            <label class="block mb-4 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Event Brochure/Invitiation/label>
-            <input accept=".jpg,.png,.PNG,.JPEG" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
-            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG(1 Photo * 5 MB)</p>
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Event Brochure/Invitiation/label>
+            <input required accept=".jpg,.png,.PNG,.JPEG" data-reason="activity_brochure" class="file block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none" aria-describedby="file_input_help" id="file_input" type="file">
+            <p class="mt-1 text-sm text-gray-500" id="file_input_help">PNG, JPG(5 MB * 1 Photo)</p>
         </div>
     </div>
-</div>
+</div> -->
+{% if activity.activity_name == "Project Completion" %}
+    <div class="col-span-full">
+            <div class="mb-2 flex justify-between items-center">
+                <p class="font-semibold text-lg">Integrate Github</p>
+                <a class="gap-2 inline-flex items-center justify-center font-semibold text-[#c09711] hover:text-[#C2A34E] hover:underline transition-colors duration-200">
+                    Integrate
+                    <img src="{% static 'images/chevron.svg' %}" alt="" class="w-5 h-5">
+                </a>
+            </div>
+            <div class="flex items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-white p-12 text-center">
+                <div>
+                    <div class="mx-auto h-12 w-12 text-gray-400">
+                        <img src="{% static 'images/github.svg' %}" alt="" class="w-full opacity-55">
+                    </div>
+                    <h3 class="mt-2 text-2xl font-semibold text-gray-400">Coming Soon</h3>
+                    <p class="mt-1 text-base text-gray-500">Student can integrate their github if available, it will be used for verification based on activity/commit/pull logs</p>
+                </div>
+            </div>
+         </div>
+{% endif %}
 <div class="w-full h-[1px] bg-gray-200 col-span-full"></div>
+ <!-- <div class="mb-4">
+                            <label class="block text-base font-medium text-gray-800 mb-2">Selected Tags</label>
+                            <div id="selected-tags" class="flex flex-wrap gap-2 min-h-[40px] p-3 border border-gray-300 rounded-lg bg-gray-50">
+                                <span class="text-gray-500 text-sm" id="no-tags-message">No tags selected</span>
+                            </div>
+                        </div> -->
+                        
+                        <!-- Available Tags -->
+                        <!-- <div class="mb-4">
+                            <label class="block text-base font-medium text-gray-800 mb-2">Available Tags</label>
+                            <div id="available-tags" class="flex flex-wrap gap-2 p-3 border border-gray-300 rounded-lg bg-white max-h-48 overflow-y-auto">
+                                {% for tag in tags %}
+                                <button type="button" 
+                                        class="tag-button px-3 py-1 text-sm font-medium rounded-full border transition-all duration-200 hover:shadow-md"
+                                        data-skill-id="{{ tag.id }}"
+                                        data-skill-name="{{ tag.tag_name }}">
+                                    {{ tag.tag_name }}
+                                </button>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        
+                        Add New Tag
+                        <div class="mb-4 col-span-full">
+                            <label class="block text-base font-medium text-gray-800 mb-2">Add New Tag</label>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                <div>
+                                <input type="text" 
+                                       id="new-tag-input" 
+                                       placeholder="Enter new tag name"
+                                       class="flex w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#D4AF37] focus:border-[#D4AF37]">
+                                </div>
+                                <div class="flex w-full gap-2">
+                                <select class="bg-white focus:outline-none border border-gray-300 rounded-lg py-2 px-4 flex w-full appearance-none leading-normal text-gray-700" name="domain" id="id_domain"> 
+                                    <option value="" selected disabled>---------</option> 
+                                    {% for domain in domains %}
+                                    <option value="1">{{domain.domain_name}}</option> 
+                                    {% endfor %}
+                                </select>
+                                <button type="button" 
+                                        id="add-new-tag-btn"
+                                        class="px-4 py-2 bg-[#D4AF37] hover:bg-[#C2A34E] text-black font-medium rounded-lg transition-colors duration-200">
+                                    Add
+                                </button>
+                                </div>
+                            </div>
+                            <small id="id_organizer_name_helptext" class="text-gray-600">Adding relevant tags helps us identify your achievements easily for ranking</small>
+                        </div> -->
+
 <div class="relative flex gap-x-3 col-span-full">
 <div class="flex h-6 items-center">
     <input required id="comments" name="comments" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-[#D4AF37] focus:ring-[#D4AF37]">
@@ -50,4 +122,8 @@
 </button>
 </form>
 </div>
+{% endblock %}
+
+{% block script %}
+<!-- <script src="{% static 'js/tags.js' %}"></script> -->
 {% endblock %}

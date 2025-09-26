@@ -7,39 +7,49 @@ class Competition(BaseAchievement):
         return self.title
     
 class Workshop(BaseAchievement):
-    team = None
+    team = result = None
     class mode(models.TextChoices):
         OFFLINE = ("OFFLINE", "Offline")
         ONLINE = ("ONLINE", "Online")
         HYBRID = ("HYBRID", "Hybrid")
-    class result(models.TextChoices):
-        SPECIAL_MENTION = ("SPECIAL_MENTION", "Special Mention")
-        PARTICIPATION = ("PARTICIPATION", "Participation")
+    mode_of_work = models.CharField(max_length=50, choices=mode.choices)
+        
         
 
 class Course_Completion(BaseAchievement):
-    team = organizer_name = None
-    verification_url = models.CharField(max_length=150, help_text="Certificate Verification URL or Code(if applicable)", null=True, blank=True)
+    team = organizer_name = brochures = participation_photos = event_id = None
+    achievement_outcome = event_level = None
+    verification_url = models.CharField(max_length=150, help_text="Certificate Verification URL or Code(if available)", null=True, blank=True)
     course_provider = models.ForeignKey(Course_Provider, on_delete=models.RESTRICT)
     
 class Preplacement(BaseAchievement):
-    result = event_level = institution = organizer_name = team = None
+    result = event_level = institution = organizer_name = team = title = None
+    brochures = participation_photos = event_id = None
+     
     organization = models.CharField(max_length=300)
     class pp_type(models.TextChoices):
         INTERNSHIP = "INTERNSHIP", "Internship"
         APPRENTICESHIP = "APPRENTICESHIP", "Apprenticeship"
         FREELANCING = "FREELANCING", "Freelancing"
+    ppo_type = models.CharField(max_length=50, choices=pp_type.choices)
     role = models.CharField(max_length=100, help_text="Describe your Role")
-    github_link = models.URLField()
+    github_link = models.URLField(null=True, blank=True)
+    
+    def __str__(self):
+        return self.organization
     
 class Project(GenericAchievement):
+    brochures = participation_photos = event_id = certificate = None
     title = models.CharField(max_length=200)
     problem_statement = models.TextField(help_text="Describe the problem statement")
-    class project_type(models.TextChoices):
+    class project_types(models.TextChoices):
         SOFTWARE = "SOFTWARE", "Software"
         HARDWARE = "HARDWARE", "Hardware"
-    github_link = models.URLField()
-    prototype_video = models.URLField()
+    project_type = models.CharField(max_length=50, choices=project_types.choices)
+    github_link = models.URLField(null=True, blank=True)
+    # prototype_video = models.URLField()
+    prototype_video = models.FileField(upload_to="project_videos/")
+    
     
     def __str__(self):
         return self.title
